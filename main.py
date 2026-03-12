@@ -7,7 +7,17 @@ from moondream.moon import analyze_image, build_pdf
 import signal
 import sys
 
+print("Torch version:", torch.__version__)
+print("CUDA available:", torch.cuda.is_available())
+
+if torch.cuda.is_available():
+    print("GPU:", torch.cuda.get_device_name(0))
+    print("CUDA version:", torch.version.cuda)
+else:
+    print("Running on CPU")
+
 device = "cuda" if torch.cuda.is_available() else "cpu"
+print(f"Device selected: {device}")
 
 # Parameters
 user_query = "person with gun"
@@ -21,6 +31,7 @@ model, preprocess, _ = open_clip.create_model_and_transforms(
     pretrained="laion2b_s34b_b79k"
 )
 model = model.to(device)
+print("Model running on:", next(model.parameters()).device)
 
 try:
     collection = client.get_collection("images")
@@ -31,6 +42,7 @@ except:
     )
 
 text_tokens = tokenizer(user_query).to(device)
+print("Text tensor device:", text_tokens.device)
 
 with torch.no_grad():
     text_embeddings = model.encode_text(text_tokens)
