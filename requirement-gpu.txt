@@ -1,0 +1,10 @@
+ollama
+Pillow
+reportlab
+requests
+
+open_clip_torch
+
+numpy
+opencv-python
+tqdm

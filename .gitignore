@@ -2,3 +2,14 @@ vectordb/
 assets/
 output/
 moondream/grok_api.py
+venv/
+
+moondream/__pycache__/
+
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+.venv/
+venv/
