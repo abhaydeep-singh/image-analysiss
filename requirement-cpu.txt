@@ -1,0 +1,13 @@
+ollama
+Pillow
+reportlab
+requests
+
+open_clip_torch
+
+torch
+torchvision
+
+numpy
+opencv-python
+tqdm
