@@ -1,0 +1,121 @@
+Pipeline started : 2026-03-15 17:23:25.369951
+============================================================
+[17:23:25] Torch version    : 2.5.1+cu118
+[17:23:25] CUDA available   : True
+[17:23:25] GPU              : NVIDIA GeForce GTX 1650
+[17:23:25] CUDA version     : 11.8
+[17:23:25] VRAM             : 4.3 GB
+[17:23:25] Device selected  : cuda
+[17:23:25] ============================================================
+[17:23:25] Query            : 'person with gun'
+[17:23:25] Threshold        : 0.2
+[17:23:25] Top K            : 50
+[17:23:25] ============================================================
+[17:23:25] Loading CLIP model...
+[17:23:29] Model loaded     : 4.56s  |  device: cuda:0
+[17:23:31] DB connected     : 6772 images indexed
+[17:23:31] Query cache      : 36 embeddings loaded
+[17:23:31] ------------------------------------------------------------
+[17:23:31] CLIP QUERY
+[17:23:31] ------------------------------------------------------------
+[17:23:31] Text embed time  : 13.6ms  (4 variants expanded + averaged)
+[17:23:31] DB query time    : 28.9ms
+[17:23:31] Total query time : 42.5ms  GPU:33% VRAM:4053MB
+[17:23:31] Dynamic threshold: 0.2360  |  Effective: 0.2360
+[17:23:31] ------------------------------------------------------------
+[17:23:31]   FILENAME                               SCORE  STATUS
+[17:23:31]   ----------------------------------------------------
+[17:23:31]   man-gun-isolated-23933764.jpg         0.2908  ✅ PASS
+[17:23:31]   image3351.jpg                         0.2907  ✅ PASS
+[17:23:31]   image5962.jpg                         0.2734  ✅ PASS
+[17:23:31]   image7629.jpg                         0.2619  ✅ PASS
+[17:23:31]   image8692.jpg                         0.2529  ✅ PASS
+[17:23:31]   image7092.jpg                         0.2492  ✅ PASS
+[17:23:31]   864_0rm[1].jpg                        0.2475  ✅ PASS
+[17:23:31]   image5956.jpg                         0.2471  ✅ PASS
+[17:23:31]   image9875.jpg                         0.2457  ✅ PASS
+[17:23:31]   image3570.jpg                         0.2455  ✅ PASS
+[17:23:31]   image8475.jpg                         0.2447  ✅ PASS
+[17:23:31]   image28.jpg                           0.2438  ✅ PASS
+[17:23:31]   image6605.jpg                         0.2434  ✅ PASS
+[17:23:31]   image3548.jpg                         0.2407  ✅ PASS
+[17:23:31]   image5579.jpg                         0.2402  ✅ PASS
+[17:23:31]   1439_images[8].jpg                    0.2391  ✅ PASS
+[17:23:31]   image4717.jpg                         0.2365  ✅ PASS
+[17:23:31]   image9093.jpg                         0.2361  ✅ PASS
+[17:23:31]   image1408.jpg                         0.2353  ❌ SKIP
+[17:23:31]   1047_images[4].jpg                    0.2348  ❌ SKIP
+[17:23:31]   850_s.jpg                             0.2344  ❌ SKIP
+[17:23:31]   image9624.jpg                         0.2341  ❌ SKIP
+[17:23:31]   image315.jpg                          0.2334  ❌ SKIP
+[17:23:31]   image7469.jpg                         0.2321  ❌ SKIP
+[17:23:31]   image2722.jpg                         0.2312  ❌ SKIP
+[17:23:31]   image840.jpg                          0.2311  ❌ SKIP
+[17:23:31]   image6518.jpg                         0.2310  ❌ SKIP
+[17:23:31]   image8044.jpg                         0.2309  ❌ SKIP
+[17:23:31]   image8489.jpg                         0.2305  ❌ SKIP
+[17:23:31]   image1117.jpg                         0.2305  ❌ SKIP
+[17:23:31]   915_images[7].jpg                     0.2303  ❌ SKIP
+[17:23:31]   image6546.jpg                         0.2293  ❌ SKIP
+[17:23:31]   image7758.jpg                         0.2279  ❌ SKIP
+[17:23:31]   image1928.jpg                         0.2275  ❌ SKIP
+[17:23:31]   image4509.jpg                         0.2269  ❌ SKIP
+[17:23:31]   image424.jpg                          0.2267  ❌ SKIP
+[17:23:31]   image4737.jpg                         0.2258  ❌ SKIP
+[17:23:31]   image6078.jpg                         0.2245  ❌ SKIP
+[17:23:31]   image7303.jpg                         0.2239  ❌ SKIP
+[17:23:31]   image8357.jpg                         0.2238  ❌ SKIP
+[17:23:31]   image6271.jpg                         0.2236  ❌ SKIP
+[17:23:31]   image6637.jpg                         0.2228  ❌ SKIP
+[17:23:31]   1292_images[1].jpg                    0.2227  ❌ SKIP
+[17:23:31]   1344_images[5].jpg                    0.2225  ❌ SKIP
+[17:23:31]   image8621.jpg                         0.2210  ❌ SKIP
+[17:23:31]   image772.jpg                          0.2206  ❌ SKIP
+[17:23:31]   image5920.jpg                         0.2205  ❌ SKIP
+[17:23:31]   image6608.jpg                         0.2201  ❌ SKIP
+[17:23:31]   image178.jpg                          0.2196  ❌ SKIP
+[17:23:31]   image7367.jpg                         0.2195  ❌ SKIP
+[17:23:31] ------------------------------------------------------------
+[17:23:31] Selected 18 / 50 images  (threshold: 0.2360)
+[17:23:31] ------------------------------------------------------------
+[17:23:31] MOONDREAM ANALYSIS
+[17:23:31] ------------------------------------------------------------
+[17:23:39]   [  1/18] man-gun-isolated-23933764.jpg       score:0.2908  time:8.52s  ETA:2m24s  GPU:100% VRAM:4049MB
+[17:23:41]   [  2/18] image3351.jpg                       score:0.2907  time:2.08s  ETA:1m24s  GPU:100% VRAM:4051MB
+[17:23:43]   [  3/18] image5962.jpg                       score:0.2734  time:2.03s  ETA:1m3s  GPU:100% VRAM:4051MB
+[17:23:45]   [  4/18] image7629.jpg                       score:0.2619  time:2.01s  ETA:0m51s  GPU:100% VRAM:4051MB
+[17:23:47]   [  5/18] image8692.jpg                       score:0.2529  time:2.03s  ETA:0m43s  GPU:100% VRAM:4051MB
+[17:23:49]   [  6/18] image7092.jpg                       score:0.2492  time:1.98s  ETA:0m37s  GPU:100% VRAM:4051MB
+[17:23:51]   [  7/18] 864_0rm[1].jpg                      score:0.2475  time:2.02s  ETA:0m32s  GPU:100% VRAM:4051MB
+[17:23:53]   [  8/18] image5956.jpg                       score:0.2471  time:2.00s  ETA:0m28s  GPU:100% VRAM:4051MB
+[17:23:55]   [  9/18] image9875.jpg                       score:0.2457  time:1.98s  ETA:0m24s  GPU:100% VRAM:4051MB
+[17:23:57]   [ 10/18] image3570.jpg                       score:0.2455  time:2.02s  ETA:0m21s  GPU:100% VRAM:4051MB
+[17:23:59]   [ 11/18] image8475.jpg                       score:0.2447  time:1.99s  ETA:0m18s  GPU:100% VRAM:4051MB
+[17:24:01]   [ 12/18] image28.jpg                         score:0.2438  time:2.01s  ETA:0m15s  GPU:100% VRAM:4051MB
+[17:24:03]   [ 13/18] image6605.jpg                       score:0.2434  time:2.00s  ETA:0m12s  GPU:100% VRAM:4051MB
+[17:24:05]   [ 14/18] image3548.jpg                       score:0.2407  time:2.00s  ETA:0m9s  GPU:100% VRAM:4051MB
+[17:24:07]   [ 15/18] image5579.jpg                       score:0.2402  time:2.02s  ETA:0m7s  GPU:100% VRAM:4051MB
+[17:24:10]   [ 16/18] 1439_images[8].jpg                  score:0.2391  time:2.01s  ETA:0m4s  GPU:100% VRAM:4051MB
+[17:24:12]   [ 17/18] image4717.jpg                       score:0.2365  time:1.99s  ETA:0m2s  GPU:100% VRAM:4051MB
+[17:24:14]   [ 18/18] image9093.jpg                       score:0.2361  time:2.01s  ETA:0m0s  GPU:100% VRAM:4051MB
+[17:24:14] ------------------------------------------------------------
+[17:24:14] Moondream done   : 18 images  GPU:100% VRAM:4051MB
+[17:24:14] Total time       : 42.7s
+[17:24:14] Avg per image    : 2.37s
+[17:24:14] Throughput       : 0.4 img/s
+[17:24:14] ------------------------------------------------------------
+[17:24:14] Generating PDF...
+[17:24:14] PDF saved        : ./output/moondream_report.pdf  (0.28s)
+[17:24:14] ============================================================
+[17:24:14] PIPELINE COMPLETE
+[17:24:14]   Query          : 'person with gun'
+[17:24:14]   DB images      : 6772
+[17:24:14]   CLIP results   : 50
+[17:24:14]   Selected       : 18
+[17:24:14]   Analyzed       : 18
+[17:24:14]   Model load     : 4.56s
+[17:24:14]   CLIP query     : 42.5ms
+[17:24:14]   Moondream      : 42.7s  (2.37s/img)
+[17:24:14]   PDF generation : 0.28s
+[17:24:14]   Log saved      : pipeline_log_20260315_172325.txt
+[17:24:14] ============================================================

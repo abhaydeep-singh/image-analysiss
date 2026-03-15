@@ -1,20 +1,17 @@
-FIRST_RUN = False
-import sys
-import os
+"""
+To use in main.py, replace:
+    from moondream.moon import analyze_image, build_pdf
+with:
+    from moondream.moon_ollama import analyze_image, build_pdf
 
-sys.stdout.reconfigure(encoding='utf-8')
-# os.environ["HF_HOME"] = r"G:\image-analysiss\hf_cache"
-os.environ["HF_HUB_DISABLE_PROGRESS_BARS"] = "1"
-os.environ["TRANSFORMERS_VERBOSITY"]       = "error"
+Requirements:
+    - Ollama installed and running (ollama serve)
+    - Moondream pulled (ollama pull moondream)
+    - pip install ollama
+"""
 
-if not FIRST_RUN:
-    os.environ["TRANSFORMERS_OFFLINE"]  = "1"
-    os.environ["HF_DATASETS_OFFLINE"]   = "1"
-
-
-import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer
-from pathlib import Path
+import ollama
+import base64
 from PIL import Image as PILImage
 
 from reportlab.lib.pagesizes import A4, landscape
@@ -27,61 +24,30 @@ from reportlab.platypus import (
     Image as RLImage, PageBreak
 )
 
-# ── Model ─────────────────────────────────────────────────────────────────────
-_device   = "cuda"
-_dtype    = torch.float16
-_model_id = "vikhyatk/moondream2"
-_revision = "92d3d73b6fd61ab84d9fe093a9c7fd8c04bf2c0d"
-
-_tokenizer = AutoTokenizer.from_pretrained(
-    _model_id,
-    revision=_revision,
-    trust_remote_code=True,
-    local_files_only=not FIRST_RUN 
-)
-_model = AutoModelForCausalLM.from_pretrained(
-    _model_id,
-    revision=_revision,
-    trust_remote_code=True,
-    torch_dtype=_dtype,
-    local_files_only=not FIRST_RUN,
-    attn_implementation="eager"   # ← add this, bypasses SDPA entirely
-).to(_device)
-_model.eval()
-
-
-# Fix AttentionMaskConverter compatibility with transformers 4.40.0
-try:
-    from transformers.modeling_attn_mask_utils import AttentionMaskConverter
-    orig = AttentionMaskConverter._ignore_causal_mask_sdpa
-
-    @classmethod
-    def _patched(cls, *args, **kwargs):
-        kwargs.pop("is_training", None)
-        return orig(*args, **kwargs)  # no .__func__
-
-    AttentionMaskConverter._ignore_causal_mask_sdpa = _patched
-except Exception:
-    pass
-
-print("Moondream loaded")
-
-PROMPT = """Describe this image in detail. Cover:
+PROMPT = """
+Describe this image in detail. Cover:
 1. Overall scene and environment
 2. People present and what they are doing
 3. Notable objects visible
-Be factual, clear, and specific."""
+
+Be factual, clear, and specific.
+"""
 
 
 # ── Image analysis ────────────────────────────────────────────────────────────
 def analyze_image(image_path: str) -> str:
+    with open(image_path, "rb") as f:
+        image_data = base64.b64encode(f.read()).decode("utf-8")
     try:
-        image   = PILImage.open(image_path).convert("RGB")
-        encoded = _model.encode_image(image)
-        answer  = _model.answer_question(encoded, PROMPT, _tokenizer)
-        return answer.strip()
+        response = ollama.chat(
+            model="moondream",
+            messages=[{"role": "user", "content": PROMPT, "images": [image_data]}]
+        )
+        return response["message"]["content"].strip()
     except Exception as e:
         return f"[Analysis failed: {str(e)}]"
+
+
 # ── PDF generation ────────────────────────────────────────────────────────────
 def build_pdf(results: list, output_path: str):
     doc = SimpleDocTemplate(
@@ -99,14 +65,20 @@ def build_pdf(results: list, output_path: str):
 
     styles     = getSampleStyleSheet()
     body_style = ParagraphStyle(
-        "Body", parent=styles["Normal"],
-        fontSize=9, leading=14,
-        textColor=colors.HexColor("#222222"), spaceAfter=4,
+        "Body",
+        parent=styles["Normal"],
+        fontSize=9,
+        leading=14,
+        textColor=colors.HexColor("#222222"),
+        spaceAfter=4,
     )
     label_style = ParagraphStyle(
-        "ImageLabel", parent=styles["Normal"],
-        fontSize=9, textColor=colors.HexColor("#888888"),
-        alignment=TA_CENTER, spaceAfter=4,
+        "ImageLabel",
+        parent=styles["Normal"],
+        fontSize=9,
+        textColor=colors.HexColor("#888888"),
+        alignment=TA_CENTER,
+        spaceAfter=4,
     )
 
     img_col_w = usable_w * 0.45

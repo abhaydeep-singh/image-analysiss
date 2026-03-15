@@ -1,10 +1,62 @@
-ollama
-Pillow
-reportlab
+# ── requirements-gpu.txt ─────────────────────────────────────────────────────
+# GPU setup for image analysis pipeline
+# Tested on: GTX 1650 4GB, CUDA 11.8, Python 3.10, Windows
+# PyTorch version confirmed: 2.5.1+cu118
+#
+# INSTALL ORDER MATTERS:
+#
+# Step 1 — Install PyTorch with CUDA FIRST (do NOT use pip install torch directly)
+#   Run this exact command:
+#   pip install torch==2.5.1+cu118 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+#
+# Step 2 — Then install everything else:
+#   pip install -r requirements-gpu.txt
+#
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Core ML
+open_clip_torch==3.3.0
+transformers==4.40.0          # DO NOT upgrade — 4.42+ is slow on GTX 16xx series
+einops==0.8.2
+
+# Vector DB
+chromadb==1.5.5
+
+# Image processing
+Pillow==12.0.0
+numpy==2.2.6
+
+# PDF generation
+reportlab==4.4.10
+
+# Moondream client (not used directly — transformers used instead)
+# moondream==0.2.0
+
+# Monitoring
+psutil==7.2.2
+pynvml==13.0.1                # deprecated, nvidia-ml-py preferred but pynvml works
+
+# HTTP (for Ollama version)
 requests
 
-open_clip_torch
-
-numpy
-opencv-python
-tqdm
+# ─────────────────────────────────────────────────────────────────────────────
+# NOTES:
+#
+# transformers==4.40.0 is CRITICAL
+#   4.42+ uses SDPA attention which is 8x slower on GTX 16xx (no Tensor Cores)
+#   4.40.0 + attn_implementation="eager" in moon.py = ~2s/image
+#
+# torch must be CUDA build (2.5.1+cu118 tested)
+#   CPU torch will work but Moondream will be ~4x slower
+#   Verify with: python -c "import torch; print(torch.cuda.is_available())"
+#
+# moondream==0.2.0 package is NOT used for inference
+#   We use transformers directly with vikhyatk/moondream2 weights
+#   Model cached at: C:\Users\<user>\.cache\huggingface\hub\
+#   Revision: 92d3d73b6fd61ab84d9fe093a9c7fd8c04bf2c0d
+#   First run downloads ~3.7GB — subsequent runs use local cache
+#
+# Windows encoding fix required in moon.py:
+#   Add at top: import sys; sys.stdout.reconfigure(encoding='utf-8')
+#   Without this, emoji in print() crashes silently on Windows cp1252
+# ─────────────────────────────────────────────────────────────────────────────

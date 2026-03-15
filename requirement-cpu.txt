@@ -4,7 +4,7 @@ reportlab
 requests
 
 open_clip_torch
-
+moondream
 torch
 torchvision
 

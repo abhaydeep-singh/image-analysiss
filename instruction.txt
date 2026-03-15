@@ -1,0 +1,12 @@
+# 1. Create venv
+python -m venv venv310
+venv310\Scripts\activate
+
+# 2. Install PyTorch with CUDA first
+pip install torch==2.5.1+cu118 torchvision --index-url https://download.pytorch.org/whl/cu118
+
+# 3. Install everything else
+pip install -r requirements-gpu.txt
+
+# 4. Verify
+python -c "import torch; print(torch.__version__); print(torch.cuda.is_available())"
