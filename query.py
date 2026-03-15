@@ -20,8 +20,8 @@ print("Device:", device)
 CACHE_FILE   = "./query_cache.json"
 DB_PATH      = "./vectordb"
 TOP_K        = 5
-USE_FP16     = device == "cuda"   # FP16 only on GPU
-USE_COMPILE  = device == "cuda" and hasattr(torch, "compile")
+USE_FP16     = False  # GTX 1650 has no Tensor Cores — FP16 is slower
+USE_COMPILE  = False  # torch.compile broken on PyTorch 2.5.1+cu118, skip it
 BATCH_SIZE   = 64 if device == "cuda" else 8
 # ─────────────────────────────────────────────────────────────────────────────
 

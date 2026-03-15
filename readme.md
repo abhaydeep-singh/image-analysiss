@@ -13,3 +13,6 @@ pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
 exe clip.py to create index/embeddings
 query.py for embeddings search only
 main.py for embeddings + monndream analysis 
+
+python 3.10.11 https://www.python.org/downloads/release/python-31011/
+https://github.com/libjpeg-turbo/libjpeg-turbo/releases

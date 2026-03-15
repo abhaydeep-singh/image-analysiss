@@ -1,0 +1,29 @@
+Indexing started : 2026-03-15 11:22:38.714580
+Device           : cuda (FP32)
+Batch size       : 384
+Folder           : ./assets
+-----------------------------------------------------------------------------------------------
+progress | decode | embed | db | total | CPU% RAM% GPU% VRAM | ETA
+-----------------------------------------------------------------------------------------------
+TurboJPEG        : not used (PIL sufficient at this batch size)
+batch 1/18 (384/6772) | decode:1.48s embed:2.95s db:0.81s total:3.84s | CPU:29% RAM:91% GPU:53% VRAM:2355MB | ETA:1m5s
+batch 2/18 (768/6772) | decode:1.02s embed:2.75s db:0.64s total:3.41s | CPU:88% RAM:91% GPU:100% VRAM:2357MB | ETA:1m0s
+batch 3/18 (1152/6772) | decode:1.07s embed:2.75s db:0.36s total:3.12s | CPU:76% RAM:91% GPU:100% VRAM:2357MB | ETA:0m54s
+batch 4/18 (1536/6772) | decode:1.86s embed:2.81s db:0.42s total:3.22s | CPU:75% RAM:92% GPU:68% VRAM:2305MB | ETA:0m49s
+batch 5/18 (1920/6772) | decode:1.36s embed:2.75s db:0.28s total:3.03s | CPU:66% RAM:91% GPU:82% VRAM:2305MB | ETA:0m44s
+batch 6/18 (2304/6772) | decode:2.06s embed:2.76s db:0.29s total:3.05s | CPU:55% RAM:86% GPU:82% VRAM:2305MB | ETA:0m40s
+batch 7/18 (2688/6772) | decode:1.05s embed:2.74s db:0.44s total:3.19s | CPU:49% RAM:87% GPU:83% VRAM:2305MB | ETA:0m36s
+batch 8/18 (3072/6772) | decode:1.71s embed:2.76s db:0.27s total:3.03s | CPU:50% RAM:87% GPU:100% VRAM:2305MB | ETA:0m32s
+batch 9/18 (3456/6772) | decode:1.46s embed:2.76s db:0.29s total:3.06s | CPU:48% RAM:88% GPU:100% VRAM:2305MB | ETA:0m29s
+batch 10/18 (3840/6772) | decode:1.21s embed:2.76s db:0.37s total:3.13s | CPU:45% RAM:88% GPU:100% VRAM:2305MB | ETA:0m25s
+batch 11/18 (4224/6772) | decode:1.14s embed:2.75s db:0.28s total:3.03s | CPU:49% RAM:88% GPU:100% VRAM:2305MB | ETA:0m22s
+batch 12/18 (4608/6772) | decode:1.18s embed:2.78s db:0.31s total:3.09s | CPU:47% RAM:88% GPU:100% VRAM:2305MB | ETA:0m18s
+batch 13/18 (4992/6772) | decode:1.16s embed:2.75s db:0.38s total:3.13s | CPU:52% RAM:89% GPU:100% VRAM:2305MB | ETA:0m15s
+batch 14/18 (5376/6772) | decode:1.07s embed:2.75s db:0.33s total:3.08s | CPU:42% RAM:87% GPU:100% VRAM:2305MB | ETA:0m12s
+batch 15/18 (5760/6772) | decode:1.10s embed:2.76s db:0.32s total:3.08s | CPU:22% RAM:86% GPU:100% VRAM:2305MB | ETA:0m9s
+batch 16/18 (6144/6772) | decode:1.14s embed:2.75s db:0.39s total:3.13s | CPU:26% RAM:87% GPU:100% VRAM:2305MB | ETA:0m6s
+batch 17/18 (6528/6772) | decode:1.27s embed:2.76s db:0.29s total:3.06s | CPU:22% RAM:87% GPU:100% VRAM:2305MB | ETA:0m3s
+batch 18/18 (6772/6772) | decode:0.72s embed:10.35s db:0.20s total:10.56s | CPU:19% RAM:88% GPU:100% VRAM:1899MB | ETA:0m0s
+-----------------------------------------------------------------------------------------------
+
+Indexing complete | total:66.1s | throughput:102.5 img/s | DB total:6772
