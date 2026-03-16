@@ -10,8 +10,8 @@ from concurrent.futures import ThreadPoolExecutor
 from queue import Queue
 
 # ── CONFIG ────────────────────────────────────────────────────────────────────
-BATCH_SIZE          = 384      # GTX 1660 handles larger batches well in FP32
-FOLDER              = "./assets"
+BATCH_SIZE          = 50    
+FOLDER              = "./assets40k"
 DB_PATH             = "./vectordb"
 VALID_EXT           = (".png", ".jpg", ".jpeg")
 USE_FP16            = False    # GTX 1650/1660 has no Tensor Cores — FP16 is slower

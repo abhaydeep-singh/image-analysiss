@@ -1,0 +1,25 @@
+Indexing started : 2026-03-16 13:24:17.456610
+Device           : cpu (FP32)
+Batch size       : 384
+Folder           : ./assets5k
+-----------------------------------------------------------------------------------------------
+progress | decode | embed | db | total | CPU% RAM% GPU% VRAM | ETA
+-----------------------------------------------------------------------------------------------
+TurboJPEG        : not used (PIL sufficient at this batch size)
+batch 1/14 (384/5000) | decode:2.26s embed:12.22s db:0.16s total:12.37s | CPU:45% RAM:85% GPU:N/A | ETA:2m40s
+batch 2/14 (768/5000) | decode:6.14s embed:14.93s db:0.11s total:15.04s | CPU:81% RAM:86% GPU:N/A | ETA:2m34s
+batch 3/14 (1152/5000) | decode:9.70s embed:15.08s db:0.20s total:15.28s | CPU:84% RAM:91% GPU:N/A | ETA:2m27s
+batch 4/14 (1536/5000) | decode:9.44s embed:19.36s db:0.25s total:19.62s | CPU:78% RAM:93% GPU:N/A | ETA:2m26s
+batch 5/14 (1920/5000) | decode:9.38s embed:24.22s db:0.19s total:24.43s | CPU:76% RAM:90% GPU:N/A | ETA:2m29s
+batch 6/14 (2304/5000) | decode:10.54s embed:23.55s db:0.34s total:23.91s | CPU:69% RAM:88% GPU:N/A | ETA:2m24s
+batch 7/14 (2688/5000) | decode:11.97s embed:17.85s db:0.07s total:17.94s | CPU:74% RAM:88% GPU:N/A | ETA:2m6s
+batch 8/14 (3072/5000) | decode:13.05s embed:13.90s db:0.09s total:14.02s | CPU:82% RAM:87% GPU:N/A | ETA:1m43s
+batch 9/14 (3456/5000) | decode:12.24s embed:20.51s db:0.36s total:20.88s | CPU:75% RAM:89% GPU:N/A | ETA:1m29s
+batch 10/14 (3840/5000) | decode:12.52s embed:22.14s db:0.30s total:22.46s | CPU:73% RAM:90% GPU:N/A | ETA:1m15s
+batch 11/14 (4224/5000) | decode:12.58s embed:21.64s db:0.19s total:21.84s | CPU:75% RAM:87% GPU:N/A | ETA:0m58s
+batch 12/14 (4608/5000) | decode:7.24s embed:22.49s db:0.33s total:22.83s | CPU:69% RAM:86% GPU:N/A | ETA:0m40s
+batch 13/14 (4992/5000) | decode:10.68s embed:23.34s db:0.22s total:23.57s | CPU:68% RAM:87% GPU:N/A | ETA:0m20s
+batch 14/14 (5000/5000) | decode:0.45s embed:0.66s db:0.03s total:0.70s | CPU:62% RAM:84% GPU:N/A | ETA:0m0s
+-----------------------------------------------------------------------------------------------
+
+Indexing complete | total:257.3s | throughput:19.4 img/s | DB total:5000

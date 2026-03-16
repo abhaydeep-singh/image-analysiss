@@ -20,7 +20,7 @@ print("Device:", device)
 CACHE_FILE   = "./query_cache.json"
 DB_PATH      = "./vectordb"
 TOP_K        = 5
-USE_FP16     = False  # GTX 1650 has no Tensor Cores — FP16 is slower
+USE_FP16     = False  # Only turn True if GPU supports it
 USE_COMPILE  = False  # torch.compile broken on PyTorch 2.5.1+cu118, skip it
 BATCH_SIZE   = 64 if device == "cuda" else 8
 # ─────────────────────────────────────────────────────────────────────────────
@@ -37,19 +37,18 @@ tokenizer = open_clip.get_tokenizer("ViT-B-32")
 model     = model.to(device)
 model.eval()
 
-# FP16 on GPU — 2-4x faster, half the VRAM
 if USE_FP16:
     model = model.half()
-    print(f"✅ loaded in FP16 ({time.time()-t0:.1f}s)")
+    print(f"loaded in FP16 ({time.time()-t0:.1f}s)")
 else:
-    print(f"✅ loaded ({time.time()-t0:.1f}s)")
+    print(f"loaded ({time.time()-t0:.1f}s)")
 
-# torch.compile — GPU only, big speedup after first call
+# torch.compile — GPU only
 if USE_COMPILE:
     print("Compiling model (one-time, ~30s)...", end=" ", flush=True)
     t0    = time.time()
     model = torch.compile(model, mode="reduce-overhead")
-    print(f"✅ ({time.time()-t0:.1f}s)")
+    print(f" ({time.time()-t0:.1f}s)")
 
 # Warmup
 print("Warming up...", end=" ", flush=True)
@@ -59,7 +58,7 @@ with torch.no_grad():
     if USE_FP16:
         dummy = dummy
     model.encode_text(dummy)
-print(f"✅ ({time.time()-t0:.2f}s)")
+print(f"  ({time.time()-t0:.2f}s)")
 
 if device == "cuda":
     torch.cuda.synchronize()
@@ -69,7 +68,7 @@ if device == "cuda":
 # ── Connect to DB ─────────────────────────────────────────────────────────────
 client     = chromadb.PersistentClient(path=DB_PATH)
 collection = client.get_collection("images")
-print(f"\n✅ DB connected — {collection.count()} images indexed")
+print(f"\n DB connected — {collection.count()} images indexed")
 
 
 # ── Persistent disk cache ─────────────────────────────────────────────────────
@@ -85,7 +84,7 @@ def save_cache(cache: dict):
     )
 
 query_cache = load_cache()
-print(f"💾 Cache: {len(query_cache)} embeddings loaded\n")
+print(f"Cache: {len(query_cache)} embeddings loaded\n")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -98,7 +97,7 @@ def get_batch_embeddings(queries: list) -> np.ndarray:
     if uncached:
         indices, texts = zip(*uncached)
 
-        # Process in chunks of BATCH_SIZE (GPU loves large batches)
+        # Process in chunks of BATCH_SIZE
         all_embs = []
         for i in range(0, len(texts), BATCH_SIZE):
             chunk  = list(texts[i:i + BATCH_SIZE])
@@ -106,7 +105,7 @@ def get_batch_embeddings(queries: list) -> np.ndarray:
 
             with torch.no_grad():
                 embs = model.encode_text(tokens)
-                embs = embs / embs.norm(dim=-1, keepdim=True)
+                embs = embs / embs.norm(dim=-1, keepdim=True) # Vector Normalisation
 
             # Move to CPU only once per batch
             all_embs.append(embs.cpu().float().numpy())

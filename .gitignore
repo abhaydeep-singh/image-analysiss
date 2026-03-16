@@ -1,5 +1,7 @@
 vectordb/
 assets/
+assets5k/
+assets40k/
 output/
 moondream/grok_api.py
 venv/
